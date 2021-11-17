@@ -1,21 +1,39 @@
-flag_file_header = 'flag: '
+flag_file_header = ''
 
 # Open encrypted text, skipping the header text and translate to hex bytes
-with open("./challenge_files/output.txt") as file:
+with open("../NuclearSale/extractedxor1") as file:
     for line in file:
-        encrypted_bytes=bytes.fromhex(line[len(flag_file_header):])
+        f1_encrypted_bytes=bytes.fromhex(line[len(flag_file_header):])
 
-# Create key using known characters from HTB flag format
-# Key length is known to be 4 from the provided encryption class
-key=['0']*4
-key[0] = ord('H') ^ encrypted_bytes[0]
-key[1] = ord('T') ^ encrypted_bytes[1]
-key[2] = ord('B') ^ encrypted_bytes[2]
-key[3] = ord('{') ^ encrypted_bytes[3]
+# Open encrypted text, skipping the header text and translate to hex bytes
+with open("../NuclearSale/extractedxor2") as file:
+    for line in file:
+        f2_encrypted_bytes=bytes.fromhex(line[len(flag_file_header):])
 
-# Use repeated key to decrypt cypher text with (a^k)^k = a xor property
-decrypted_string = ''
-for i in range(len(encrypted_bytes)):
-    decrypted_string+= chr(encrypted_bytes[i]^key[i%4])
+# Open encrypted text, skipping the header text and translate to hex bytes
+with open("../NuclearSale/extractedxor3") as file:
+    for line in file:
+        f3_encrypted_bytes=bytes.fromhex(line[len(flag_file_header):])
 
-print(decrypted_string)
+
+
+def extract_key_and_decode(encrypted_bytes):
+    # Create key using known characters from HTB flag format
+    # Key length is known to be 4 from the provided encryption class
+    key_string = '.'
+    key =[]
+    for key_char in key_string:
+        key.append(ord(key_char))
+
+    # Use repeated key to decrypt cypher text with (a^k)^k = a xor property
+    decrypted_string = ''
+    for i in range(len(encrypted_bytes)):
+        decrypted_string+= chr(encrypted_bytes[i]^key[i%len(key)])
+
+    print(decrypted_string)
+
+
+
+extract_key_and_decode(f1_encrypted_bytes)
+extract_key_and_decode(f2_encrypted_bytes)
+extract_key_and_decode(f3_encrypted_bytes)
