@@ -1,0 +1,7 @@
+VERSION=1
+/
+  00000000:boot_loader.bin:7f0118a51159251532763327
+/New Traces
+  00000001:1 - process 754290 - _home_human_HTB_bounty_head_boot_loader.bin 2021.11.17-13.14.32-PST:7f0118e0f161759102202527
+NEXT-ID:2
+MD5:d41d8cd98f00b204e9800998ecf8427e
