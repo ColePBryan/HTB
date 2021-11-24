@@ -171,3 +171,28 @@ in squashfs/ etc/mosquitto/passwd there is the following password hash with user
 dominic-f35426:$6$iUTv82apTZ0MdMP3$a+hjcpVv7OkX7pYipIPjFqisGfxLegS7FmRiLcOJBF3uaIwdMKpuQvVh0nTpglaUBsn18pssy2ZFvWlZleT8Fg==
 
 I ran this through a converter to create dominic-f35426.hash that should work with netcat. I tried many password combos including a lot of word lists in /usr/share/wordlists, and tried with some of the rules in /usr/share/hashcat/rules and some of the masks in there too. I wasn't able to figure out the password. I dug through all other available items to try to find a password and didn't see anything. typing this to remember where I left off when I try again.
+
+
+----------
+
+Password found. used the mosquitto2john.py to generate john version of file. Ran with rockyou word list.
+
+    ❯ john ./dominic-f35426-john.hash --format=dynamic_82 --word=/usr/share/wordlists/rockyou.txt
+    Using default input encoding: UTF-8
+    Loaded 1 password hash (dynamic_82 [sha512($p.$s) 256/256 AVX2 4x])
+    Warning: no OpenMP support for this hash type, consider --fork=4
+    Press 'q' or Ctrl-C to abort, almost any other key for status
+    buffbuff!!!!     (dominic-f35426)
+    1g 0:00:00:00 DONE (2021-11-21 18:55) 2.325g/s 2328Kp/s 2328Kc/s 2328KC/s ca91352..broken93
+    Use the "--show --format=dynamic_82" options to display all of the cracked passwords reliably
+    Session completed
+
+username: dominic-f35426 password: buffbuff!!!!
+
+Attempting to connect to mosquitto:
+
+`mosquitto_sub -h 64.227.36.32 -p 30209 -u dominic-f35426 -P 'buffbuff!!!!' -v -t '/#'`
+
+Found multiple streams under $SYS/#
+
+unable to get $private/geolocation to send messages, could be where the flag is due to the "Your mission is to identify the suspect's current location and apprehend him."
