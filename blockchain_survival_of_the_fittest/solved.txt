@@ -1,0 +1,6 @@
+  cast send $TARGET_ADDRESS "strongAttack(uint256)" 20 --rpc-url $RPC_URL --private-key $PRIVATE_KEY 
+  cast send $TARGET_ADDRESS "loot()" --rpc-url $RPC_URL --private-key $PRIVATE_KEY
+
+  called these two commands (webpage provided the env variable values) to first reduce the life of the monster and take the loot
+
+  then went to /flag to collect flag
