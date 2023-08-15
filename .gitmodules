@@ -1,0 +1,3 @@
+[submodule "blockchain_distract_and_destroy/attackTarget/lib/forge-std"]
+	path = blockchain_distract_and_destroy/attackTarget/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
